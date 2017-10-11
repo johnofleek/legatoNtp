@@ -1,0 +1,167 @@
+# Build script for application 'ntp'
+
+# == Auto-generated file.  Do not edit. ==
+
+builddir =./_build_ntp/wp85
+
+cFlags = -I/home/john/legato/packages/legato.framework.16.10.3.wp85-wp750x-201705031608/resources/legato/interfaces -I/home/john/legato/packages/legato.framework.16.10.3.wp85-wp750x-201705031608/resources/legato/framework/c/inc -I/home/john/workspace/legato/apps/john/ntpClient
+
+cxxFlags = -I/home/john/legato/packages/legato.framework.16.10.3.wp85-wp750x-201705031608/resources/legato/interfaces -I/home/john/legato/packages/legato.framework.16.10.3.wp85-wp750x-201705031608/resources/legato/framework/c/inc -I/home/john/workspace/legato/apps/john/ntpClient
+
+ldFlags =
+
+target = wp85
+
+ifgenFlags =  --import-dir /home/john/legato/packages/legato.framework.16.10.3.wp85-wp750x-201705031608/resources/legato/interfaces --import-dir /home/john/legato/packages/legato.framework.16.10.3.wp85-wp750x-201705031608/resources/legato/framework/c/inc --import-dir /home/john/workspace/legato/apps/john/ntpClient
+
+rule CompileC
+  description = Compiling C source
+  depfile = $out.d
+  command = /home/john/legato/packages/legato.toolchain.1.7.3.SWI9X15Y_07120900-wp85-wp750x-native-x86_64-201705021320/resources/native/sysroots/x86_64-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi/arm-poky-linux-gnueabi-gcc --sysroot=/home/john/legato/packages/legato.toolchain.1.7.3.SWI9X15Y_07120900-wp85-wp750x-native-x86_64-201705021320/resources/native/sysroots/armv7a-vfp-neon-poky-linux-gnueabi -MMD -MF $out.d -c $in -o $out -DLE_FILENAME=`basename $in` -Wall -fPIC -Werror -fvisibility=hidden -DMK_TOOLS_BUILD  -DLEGATO_EMBEDDED $cFlags
+
+rule CompileCxx
+  description = Compiling C++ source
+  depfile = $out.d
+  command = /home/john/legato/packages/legato.toolchain.1.7.3.SWI9X15Y_07120900-wp85-wp750x-native-x86_64-201705021320/resources/native/sysroots/x86_64-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi/arm-poky-linux-gnueabi-g++ --sysroot=/home/john/legato/packages/legato.toolchain.1.7.3.SWI9X15Y_07120900-wp85-wp750x-native-x86_64-201705021320/resources/native/sysroots/armv7a-vfp-neon-poky-linux-gnueabi -MMD -MF $out.d -c $in -o $out -DLE_FILENAME=`basename $in` -Wall -fPIC -Werror -fvisibility=hidden  -DMK_TOOLS_BUILD  -DLEGATO_EMBEDDED $cxxFlags
+
+rule LinkCLib
+  description = Linking C library
+  command = /home/john/legato/packages/legato.toolchain.1.7.3.SWI9X15Y_07120900-wp85-wp750x-native-x86_64-201705021320/resources/native/sysroots/x86_64-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi/arm-poky-linux-gnueabi-gcc --sysroot=/home/john/legato/packages/legato.toolchain.1.7.3.SWI9X15Y_07120900-wp85-wp750x-native-x86_64-201705021320/resources/native/sysroots/armv7a-vfp-neon-poky-linux-gnueabi -shared -o $out $in $ldFlags
+
+rule LinkCxxLib
+  description = Linking C++ library
+  command = /home/john/legato/packages/legato.toolchain.1.7.3.SWI9X15Y_07120900-wp85-wp750x-native-x86_64-201705021320/resources/native/sysroots/x86_64-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi/arm-poky-linux-gnueabi-g++ --sysroot=/home/john/legato/packages/legato.toolchain.1.7.3.SWI9X15Y_07120900-wp85-wp750x-native-x86_64-201705021320/resources/native/sysroots/armv7a-vfp-neon-poky-linux-gnueabi -shared -o $out $in $ldFlags
+
+rule LinkCExe
+  description = Linking C executable
+  command = /home/john/legato/packages/legato.toolchain.1.7.3.SWI9X15Y_07120900-wp85-wp750x-native-x86_64-201705021320/resources/native/sysroots/x86_64-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi/arm-poky-linux-gnueabi-gcc --sysroot=/home/john/legato/packages/legato.toolchain.1.7.3.SWI9X15Y_07120900-wp85-wp750x-native-x86_64-201705021320/resources/native/sysroots/armv7a-vfp-neon-poky-linux-gnueabi -o $out $in $ldFlags
+
+rule LinkCxxExe
+  description = Linking C++ executable
+  command = /home/john/legato/packages/legato.toolchain.1.7.3.SWI9X15Y_07120900-wp85-wp750x-native-x86_64-201705021320/resources/native/sysroots/x86_64-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi/arm-poky-linux-gnueabi-g++ --sysroot=/home/john/legato/packages/legato.toolchain.1.7.3.SWI9X15Y_07120900-wp85-wp750x-native-x86_64-201705021320/resources/native/sysroots/armv7a-vfp-neon-poky-linux-gnueabi -o $out $in $ldFlags
+
+rule CompileJava
+  description = Compiling Java source
+  command = javac -cp $classPath -d $classDestPath $in && $
+            jar -cf $out -C $classDestPath .
+
+rule GenInterfaceCode
+  description = Generating IPC interface code
+  command = ifgen --output-dir $outputDir $ifgenFlags $in
+
+rule MakeDir
+  description = Creating directory
+  command = mkdir -p "$out" || [ -d "$out" ]
+
+rule HardLink
+  description = Creating hard link
+  command = ln -T -f $in $out
+
+rule CopyFile
+  description = Copying file
+  command = cp -d -f -T $in $out && $
+            chmod $modeFlags $out
+
+rule RegenNinjaScript
+  description = Regenerating build script
+  generator = 1
+  command = mkapp --dont-run-ninja "ntp.adef" "-t" "wp85" "-v"
+
+rule BundleFile
+  description = Bundling file
+  command = cp -T $in $out && $
+            chmod $modeFlags $out
+
+rule MakeAppInfoProperties
+  description = Creating info.properties
+  command = rm -f $out && $
+            md5=$$( ( cd $workingDir/staging && $
+                      find -P | sort && $
+                      find -P -type f | sort | xargs cat && $
+                      find -P -type l | sort | xargs -r -n 1 readlink $
+                    ) | md5sum) && $
+            md5=$${md5%% *} && $
+            ( echo "app.name=$name" && $
+              echo "app.md5=$$md5" && $
+              echo "app.version=$version" && $
+              echo "legato.version=`cat $$LEGATO_ROOT/version`" $
+            ) > $out
+
+rule PackApp
+  description = Packaging app
+  command = tar cjf $workingDir/$name.$target -C $workingDir/staging . && $
+            tarballSize=`stat -c '%s' $workingDir/$name.$target` && $
+            md5=`grep '^app.md5=' $in | sed 's/^app.md5=//'` && $
+            ( printf '{\n' && $
+              printf '"command":"updateApp",\n' && $
+              printf '"name":"$name",\n' && $
+              printf '"version":"$version",\n' && $
+              printf '"md5":"%s",\n' "$$md5" && $
+              printf '"size":%s\n' "$$tarballSize" && $
+              printf '}' && $
+              cat $workingDir/$name.$target $
+            ) > $out
+
+rule BinPackApp
+  description = Packaging app for distribution.
+  command = cp -r $stagingDir/* $workingDir/ && $
+            rm $workingDir/info.properties $workingDir/root.cfg && $
+            tar cjf $out -C $workingDir/ .
+
+build _build_ntp/wp85/staging/read-only/lib/libComponent_appComponent.so: LinkCxxLib $builddir/component/18841315bc4ba0c5066d5c92120c9220/obj/c1258233ca5208a82a1d1b2e4d2b5891.o $builddir/api/dbf4b5391eb63bfe911b88a6e56515b6/client/le_data_client.c.o $builddir/api/2131380c6f9b3713d8ca7ae6f0589f3d/client/le_mdc_client.c.o $builddir/api/d699b785b341bdce9ace6ef785317838/client/le_mrc_client.c.o $builddir/api/df1eb47983827ed1845ab8920373af33/client/le_cfg_client.c.o $builddir/component/18841315bc4ba0c5066d5c92120c9220/obj/_componentMain.c.o | /home/john/legato/packages/legato.framework.16.10.3.wp85-wp750x-201705031608/resources/legato/build/wp85/framework/lib/liblegato.so
+  ldFlags =  -L_build_ntp/wp85/staging/read-only/lib -Wl,--enable-new-dtags,-rpath="\$$ORIGIN/../lib" "-L$$LEGATO_BUILD/framework/lib" -llegato -lpthread -lrt -lm
+
+build $builddir/component/18841315bc4ba0c5066d5c92120c9220/obj/c1258233ca5208a82a1d1b2e4d2b5891.o: CompileCxx /home/john/workspace/legato/apps/john/ntpClient/appComponent/main.cpp || $builddir/ $builddir/api/dbf4b5391eb63bfe911b88a6e56515b6/client/le_data_interface.h $builddir/api/dbf4b5391eb63bfe911b88a6e56515b6/client/le_data_messages.h $builddir/api/2131380c6f9b3713d8ca7ae6f0589f3d/client/le_mdc_interface.h $builddir/api/2131380c6f9b3713d8ca7ae6f0589f3d/client/le_mdc_messages.h $builddir/api/d699b785b341bdce9ace6ef785317838/client/le_mrc_interface.h $builddir/api/d699b785b341bdce9ace6ef785317838/client/le_mrc_messages.h $builddir/api/df1eb47983827ed1845ab8920373af33/client/le_cfg_interface.h $builddir/api/df1eb47983827ed1845ab8920373af33/client/le_cfg_messages.h
+  cxxFlags = $cxxFlags -I$builddir/component/18841315bc4ba0c5066d5c92120c9220/src -I$builddir/api/dbf4b5391eb63bfe911b88a6e56515b6/client -I$builddir/api/2131380c6f9b3713d8ca7ae6f0589f3d/client -I$builddir/api/d699b785b341bdce9ace6ef785317838/client -I$builddir/api/df1eb47983827ed1845ab8920373af33/client -DLE_COMPONENT_NAME=appComponent -DLE_LOG_SESSION=appComponent_LogSession  -DLE_LOG_LEVEL_FILTER_PTR=appComponent_LogLevelFilterPtr  "-DCOMPONENT_INIT=LE_CI_LINKAGE LE_SHARED void _appComponent_COMPONENT_INIT()" -std=c++0x
+
+build $builddir/component/18841315bc4ba0c5066d5c92120c9220/obj/_componentMain.c.o: CompileC $builddir/component/18841315bc4ba0c5066d5c92120c9220/src/_componentMain.c
+  cFlags = $cFlags -I$builddir/component/18841315bc4ba0c5066d5c92120c9220/src -I$builddir/api/dbf4b5391eb63bfe911b88a6e56515b6/client -I$builddir/api/2131380c6f9b3713d8ca7ae6f0589f3d/client -I$builddir/api/d699b785b341bdce9ace6ef785317838/client -I$builddir/api/df1eb47983827ed1845ab8920373af33/client -DLE_COMPONENT_NAME=appComponent -DLE_LOG_SESSION=appComponent_LogSession  -DLE_LOG_LEVEL_FILTER_PTR=appComponent_LogLevelFilterPtr  "-DCOMPONENT_INIT=LE_CI_LINKAGE LE_SHARED void _appComponent_COMPONENT_INIT()"
+
+build $builddir/app/ntp/obj/ntp/_main.c.o: CompileC _build_ntp/wp85/app/ntp/src/ntp/_main.c
+  cFlags = $cFlags -DLE_COMPONENT_NAME=ntp_exe -DLE_LOG_SESSION=ntp_exe_LogSession -DLE_LOG_LEVEL_FILTER_PTR=ntp_exe_LogLevelFilterPtr 
+
+build $builddir/app/ntp/staging/read-only/bin/ntp: LinkCExe $builddir/app/ntp/obj/ntp/_main.c.o | _build_ntp/wp85/staging/read-only/lib/libComponent_appComponent.so /home/john/legato/packages/legato.framework.16.10.3.wp85-wp750x-201705031608/resources/legato/build/wp85/framework/lib/liblegato.so /home/john/legato/packages/legato.framework.16.10.3.wp85-wp750x-201705031608/resources/legato/build/$target/framework/lib/liblegato.so
+  ldFlags = -rdynamic -Wl,--enable-new-dtags,-rpath="\$$ORIGIN/../lib" -L_build_ntp/wp85/staging/read-only/lib "-L_build_ntp/wp85/staging/read-only/lib" -lComponent_appComponent "-L_build_ntp/wp85/staging/read-only/lib" -lComponent_appComponent "-L$$LEGATO_BUILD/framework/lib" -llegato -lpthread -lrt -ldl -lm $ldFlags
+
+build $builddir/app/ntp/staging/read-only/lib/libComponent_appComponent.so : HardLink _build_ntp/wp85/staging/read-only/lib/libComponent_appComponent.so
+
+build $builddir/app/ntp/staging/info.properties : MakeAppInfoProperties | $builddir/app/ntp/staging/read-only/lib/libComponent_appComponent.so $builddir/app/ntp/staging/read-only/bin/ntp $builddir/app/ntp/staging/root.cfg
+  name = ntp
+  version = 
+  workingDir = $builddir/app/ntp
+
+build ntp.$target.update: PackApp $builddir/app/ntp/staging/info.properties
+  name = ntp
+  version = 
+  workingDir = $builddir/app/ntp
+
+build $builddir/api/dbf4b5391eb63bfe911b88a6e56515b6/client/le_data_client.c.o: CompileC $builddir/api/dbf4b5391eb63bfe911b88a6e56515b6/client/le_data_client.c | $builddir/api/dbf4b5391eb63bfe911b88a6e56515b6/client/le_data_messages.h $builddir/api/dbf4b5391eb63bfe911b88a6e56515b6/client/le_data_interface.h
+  cFlags = $cFlags
+
+build $builddir/api/dbf4b5391eb63bfe911b88a6e56515b6/client/le_data_client.c $builddir/api/dbf4b5391eb63bfe911b88a6e56515b6/client/le_data_interface.h $builddir/api/dbf4b5391eb63bfe911b88a6e56515b6/client/le_data_messages.h: GenInterfaceCode /home/john/legato/packages/legato.framework.16.10.3.wp85-wp750x-201705031608/resources/legato/interfaces/le_data.api |
+  ifgenFlags = --gen-client --gen-interface --gen-local --name-prefix le_data --file-prefix le_data $ifgenFlags
+  outputDir = $builddir/api/dbf4b5391eb63bfe911b88a6e56515b6/client
+
+build $builddir/api/2131380c6f9b3713d8ca7ae6f0589f3d/client/le_mdc_client.c.o: CompileC $builddir/api/2131380c6f9b3713d8ca7ae6f0589f3d/client/le_mdc_client.c | $builddir/api/2131380c6f9b3713d8ca7ae6f0589f3d/client/le_mdc_messages.h $builddir/api/2131380c6f9b3713d8ca7ae6f0589f3d/client/le_mdc_interface.h
+  cFlags = $cFlags
+
+build $builddir/api/2131380c6f9b3713d8ca7ae6f0589f3d/client/le_mdc_client.c $builddir/api/2131380c6f9b3713d8ca7ae6f0589f3d/client/le_mdc_interface.h $builddir/api/2131380c6f9b3713d8ca7ae6f0589f3d/client/le_mdc_messages.h: GenInterfaceCode /home/john/legato/packages/legato.framework.16.10.3.wp85-wp750x-201705031608/resources/legato/interfaces/modemServices/le_mdc.api |
+  ifgenFlags = --gen-client --gen-interface --gen-local --name-prefix le_mdc --file-prefix le_mdc $ifgenFlags
+  outputDir = $builddir/api/2131380c6f9b3713d8ca7ae6f0589f3d/client
+
+build $builddir/api/d699b785b341bdce9ace6ef785317838/client/le_mrc_client.c.o: CompileC $builddir/api/d699b785b341bdce9ace6ef785317838/client/le_mrc_client.c | $builddir/api/d699b785b341bdce9ace6ef785317838/client/le_mrc_messages.h $builddir/api/d699b785b341bdce9ace6ef785317838/client/le_mrc_interface.h
+  cFlags = $cFlags
+
+build $builddir/api/d699b785b341bdce9ace6ef785317838/client/le_mrc_client.c $builddir/api/d699b785b341bdce9ace6ef785317838/client/le_mrc_interface.h $builddir/api/d699b785b341bdce9ace6ef785317838/client/le_mrc_messages.h: GenInterfaceCode /home/john/legato/packages/legato.framework.16.10.3.wp85-wp750x-201705031608/resources/legato/interfaces/modemServices/le_mrc.api |
+  ifgenFlags = --gen-client --gen-interface --gen-local --name-prefix le_mrc --file-prefix le_mrc $ifgenFlags
+  outputDir = $builddir/api/d699b785b341bdce9ace6ef785317838/client
+
+build $builddir/api/df1eb47983827ed1845ab8920373af33/client/le_cfg_client.c.o: CompileC $builddir/api/df1eb47983827ed1845ab8920373af33/client/le_cfg_client.c | $builddir/api/df1eb47983827ed1845ab8920373af33/client/le_cfg_messages.h $builddir/api/df1eb47983827ed1845ab8920373af33/client/le_cfg_interface.h
+  cFlags = $cFlags
+
+build $builddir/api/df1eb47983827ed1845ab8920373af33/client/le_cfg_client.c $builddir/api/df1eb47983827ed1845ab8920373af33/client/le_cfg_interface.h $builddir/api/df1eb47983827ed1845ab8920373af33/client/le_cfg_messages.h: GenInterfaceCode /home/john/legato/packages/legato.framework.16.10.3.wp85-wp750x-201705031608/resources/legato/interfaces/le_cfg.api |
+  ifgenFlags = --gen-client --gen-interface --gen-local --name-prefix le_cfg --file-prefix le_cfg $ifgenFlags
+  outputDir = $builddir/api/df1eb47983827ed1845ab8920373af33/client
+
+build _build_ntp/wp85/build.ninja: RegenNinjaScript | /home/john/workspace/legato/apps/john/ntpClient/ntp.adef /home/john/legato/packages/legato.framework.16.10.3.wp85-wp750x-201705031608/resources/legato/interfaces/le_cfg.api /home/john/legato/packages/legato.framework.16.10.3.wp85-wp750x-201705031608/resources/legato/interfaces/le_data.api /home/john/legato/packages/legato.framework.16.10.3.wp85-wp750x-201705031608/resources/legato/interfaces/modemServices/le_mdc.api /home/john/legato/packages/legato.framework.16.10.3.wp85-wp750x-201705031608/resources/legato/interfaces/modemServices/le_mrc.api /home/john/workspace/legato/apps/john/ntpClient/appComponent/Component.cdef
+
