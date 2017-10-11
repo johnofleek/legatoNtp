@@ -19,7 +19,8 @@
 
 
 #define MAIN_TIMER_NAME                 "NTP_APP_TIMER"
-#define MAIN_TEMPERATURE_UPDATE_RATE (10)        // seconds
+#define MAIN_TEMPERATURE_UPDATE_RATE_FAST (10)        // seconds
+#define MAIN_TEMPERATURE_UPDATE_RATE_SLOW (10*60)     // seconds
 
 #define TIME_IN_THE_PAST            946684800    // 1 January 2000 00:00:00
 
@@ -77,15 +78,17 @@ static void updateTimer_cbh(le_timer_Ref_t timerRef)
     if(currentTime.sec > TIME_IN_THE_PAST)
     {
         LE_INFO("Time OK");
+        le_timer_SetMsInterval( updateTimerRef, MAIN_TEMPERATURE_UPDATE_RATE_SLOW *1000); 
     }
-
     else if(DataConnected)
     {
         LE_INFO("Trying to set the time");
         main_setSystemTimeFromNtp();
+        le_timer_SetMsInterval( updateTimerRef, MAIN_TEMPERATURE_UPDATE_RATE_FAST *1000); 
     }
     else
     {
+        le_timer_SetMsInterval( updateTimerRef, MAIN_TEMPERATURE_UPDATE_RATE_FAST *1000); 
         LE_INFO("No Network - can't run ntp client");
         // There is no Legato way I can find to query le_data for the state of the connection
         // The following bodge looks at the cellular interface to see if it's connected
@@ -114,7 +117,7 @@ static void main_timer_init(void)
     
     le_timer_SetHandler ( updateTimerRef, updateTimer_cbh);
     le_timer_SetRepeat( updateTimerRef, 0 );
-    le_timer_SetMsInterval( updateTimerRef, MAIN_TEMPERATURE_UPDATE_RATE * 1000);        
+    le_timer_SetMsInterval( updateTimerRef, MAIN_TEMPERATURE_UPDATE_RATE_FAST *1000);        
     le_timer_Start( updateTimerRef); 
 }
 
