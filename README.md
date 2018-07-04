@@ -6,3 +6,26 @@ There are some issues with the detection of the cellular IP interface. The curre
 
 A timer is used to drive the detection as there are no events I can find to hook into. The timer update rate is fast on app start then slow once the clock is set
 
+
+# GIT  
+
+## Git clone the project  
+
+```
+git clone https://github.com/johnofleek/legatoNtp.git
+```
+
+
+## Git "checkin"
+
+```
+git add .
+git commit -m "your comment"
+git push -u origin master
+```
+
+## Git "checkout"
+
+```
+git pull origin master
+```
